@@ -45,7 +45,7 @@ public:
     void display()
     {
         Color color = getcolor(mass);
-
+        
         
 
         //Trails
