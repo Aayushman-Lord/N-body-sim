@@ -17,10 +17,13 @@ Color getcolor(float mass)
     else if (mass < 50000)
         return BLUE;
     else if (mass < 100000)
+        return PURPLE;
+    else if (mass < 500000)
         return WHITE;
     else
-        return BLACK;
+        return GRAY;
 }
+
 
 class Object
 {
@@ -53,15 +56,12 @@ public:
         {
                 DrawPixel(Trails[i].x, Trails[i].y, TrailsColor);
         }
-            Trails.push_back(position);
 
-            if (Trails.size() > 440)
+        Trails.push_back(position);
+
+        if (Trails.size() > 440)
                 Trails.erase(Trails.begin());
 
-             
-        
-       
-        
 
         //Drawing main object with outline
         DrawCircle(position.x, position.y, radius + 1.5, WHITE);
@@ -76,7 +76,7 @@ int main()
 
     Object obj({screenWidth / 2, screenHeight / 2}, {0, 0}, {0, 0}, 16000, 20);
     Object obj2({screenWidth / 2 + 800, screenHeight / 2}, {0, 200}, {0, 0}, 16000, 20);
-    // Object obj3({screenWidth / 2 - 800, screenHeight / 2}, {0, -200}, {0, 0}, 2000, 20);
+    // Object obj3({screenWidth / 2 - 800, screenHeight / 2}, {0, -200}, {0, 0}, 4000, 20);
     // Object obj4({screenWidth / 2 - 800, screenHeight / 2 + 800}, {-100, 0}, {0, 0}, 1000, 10);
     // Object obj5({screenWidth / 2 + 800, screenHeight / 2 - 800}, {100, 0}, {0, 0}, 1000, 10);
 
@@ -152,11 +152,19 @@ int main()
             {
                 if (i == j)
                     continue;
+                
+                
+
 
                 float dx = objects[j].position.x - objects[i].position.x;
                 float dy = objects[j].position.y - objects[i].position.y;
 
                 float distance = sqrt(dx * dx + dy * dy);
+                
+                float minDist = objects[i].radius + objects[j].radius;
+                if (distance <= minDist)
+                    continue;
+                
                 if (distance < 5)
                     distance = 5;
 
@@ -164,6 +172,8 @@ int main()
 
                 objects[i].acceleration.x += dx / distance * accel;
                 objects[i].acceleration.y += dy / distance * accel;
+
+                
             }
         }
 
