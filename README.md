@@ -218,9 +218,6 @@ GravitySim.exe
 
 • Black holes  
 • Relativistic physics  
-• GPU acceleration  
-• Barnes-Hut optimization  
-• Save/load systems  
 • Field visualization  
 
 ---
